@@ -1,0 +1,17 @@
+{
+  "$schema": "https://smapi.io/schemas/manifest.json",
+  "Name": "Global Config Settings Rewrite",
+  "Author": "FawazT",
+  "Version": "1.0.0",
+  "Description": "A mod that allows you to change the game settings for all saves.",
+  "UniqueID": "FawazT.GlobalConfigSettingsRewrite",
+  "EntryDll": "GlobalConfigSettingsRewrite.dll",
+  "MinimumApiVersion": "4.0.0",
+  "UpdateKeys": [],
+  "Dependencies": [
+    {
+      "UniqueID": "spacechase0.GenericModConfigMenu",
+      "IsRequired": false
+    }
+  ]
+}
