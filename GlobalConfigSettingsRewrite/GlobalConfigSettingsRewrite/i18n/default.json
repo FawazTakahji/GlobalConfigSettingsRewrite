@@ -1,4 +1,9 @@
 ﻿{
+  "button.reset": "Reset",
+  "button.cancel": "Cancel",
+  "button.save": "Save",
+
+  "title.globalSettings": "Global Settings",
   "title.modSettings": "Mod Settings",
   "title.filters": "Filters",
 

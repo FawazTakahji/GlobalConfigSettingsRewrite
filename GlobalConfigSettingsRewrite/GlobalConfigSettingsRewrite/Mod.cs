@@ -1,56 +1,68 @@
-﻿using GenericModConfigMenu;
-using GlobalConfigSettingsRewrite.Utilities;
+﻿using GlobalConfigSettingsRewrite.Mods;
 using Microsoft.Xna.Framework.Input;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley;
+using GMCMPatcher = GlobalConfigSettingsRewrite.Mods.GMCM.Patches.Patcher;
+using GMCMSetup = GlobalConfigSettingsRewrite.Mods.GMCM.Setup;
+using StardewUISetup = GlobalConfigSettingsRewrite.Mods.StardewUI.Setup;
 
 namespace GlobalConfigSettingsRewrite;
 
 internal sealed class Mod : StardewModdingAPI.Mod
 {
-    private IGenericModConfigMenuApi? ConfigMenu { get; set; }
     public static Config Config { get; set; } = null!;
     public static IMonitor Logger { get; set; } = null!;
+    public static IManifest Manifest { get; set; } = null!;
+    public new static IModHelper Helper { get; set; } = null!;
     private static bool SaveCreated { get; set; }
 
     public override void Entry(IModHelper helper)
     {
         Logger = Monitor;
         I18n.Init(helper.Translation);
-        Config = Helper.ReadConfig<Config>();
+        Config = helper.ReadConfig<Config>();
+        Manifest = ModManifest;
+        Helper = helper;
         helper.Events.GameLoop.GameLaunched += OnGameLaunched;
-        helper.Events.Content.LocaleChanged += OnLocaleChanged;
         helper.Events.GameLoop.SaveCreated += OnSaveCreated;
         helper.Events.GameLoop.SaveLoaded += OnSaveLoaded;
     }
 
     private void OnGameLaunched(object? sender, GameLaunchedEventArgs e)
     {
-        ConfigMenu = GMCM.GetApi(Helper);
-        if (ConfigMenu is null)
+        Api.ViewEngine = StardewUISetup.GetApi(Helper);
+        if (Api.ViewEngine is not null)
         {
-            return;
+            StardewUISetup.Register(ModManifest.UniqueID, Api.ViewEngine);
         }
 
-        ConfigMenu.Register(ModManifest,
-            () => Config = new Config(),
-            () => Helper.WriteConfig(Config));
-        GMCM.AddOptions(ConfigMenu, ModManifest);
+        Api.GMCM = GMCMSetup.GetApi(Helper);
+        if (Api.GMCM is not null)
+        {
+            Api.GMCM.Register(ModManifest, () => Config = new Config(), () => Helper.WriteConfig(Config));
+            GMCMSetup.AddOptions(Api.GMCM, ModManifest);
+            Helper.Events.Content.LocaleChanged += OnLocaleChanged;
+        }
+
+        if (Api.ViewEngine is not null && Api.GMCM is not null)
+        {
+            GMCMPatcher.Patch(ModManifest.UniqueID, Api.GMCM);
+        }
     }
 
     private void OnLocaleChanged(object? sender, LocaleChangedEventArgs e)
     {
-        if (ConfigMenu is null)
+        if (Api.GMCM is null)
         {
             return;
         }
 
-        ConfigMenu.Unregister(ModManifest);
-        ConfigMenu.Register(ModManifest,
+        Api.GMCM.Unregister(ModManifest);
+        Api.GMCM.Register(ModManifest,
             () => Config = new Config(),
             () => Helper.WriteConfig(Config));
-        GMCM.AddOptions(ConfigMenu, ModManifest);
+        GMCMSetup.AddOptions(Api.GMCM, ModManifest);
     }
 
     private void OnSaveCreated(object? sender, SaveCreatedEventArgs e)
@@ -62,13 +74,13 @@ internal sealed class Mod : StardewModdingAPI.Mod
     {
         if (SaveCreated && Config.ApplyOnCreation)
         {
-            SaveCreated = false;
             ApplySettings();
         }
         else if (Config.ApplyOnLoad)
         {
             ApplySettings();
         }
+        SaveCreated = false;
     }
 
     private static void ApplySettings()
@@ -178,6 +190,10 @@ internal sealed class Mod : StardewModdingAPI.Mod
         if (button.TryGetKeyboard(out Keys key))
         {
             Game1.options.changeInputListenerValue(whichListener, key);
+        }
+        else
+        {
+            Logger.Log($"Failed to get key for {button}, can't apply setting to {whichListener}.", LogLevel.Warn);
         }
     }
 }

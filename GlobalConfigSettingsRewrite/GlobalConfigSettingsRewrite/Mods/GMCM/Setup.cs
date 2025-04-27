@@ -2,9 +2,9 @@
 using StardewModdingAPI;
 using StardewValley;
 
-namespace GlobalConfigSettingsRewrite.Utilities;
+namespace GlobalConfigSettingsRewrite.Mods.GMCM;
 
-public static class GMCM
+public static class Setup
 {
     public static IGenericModConfigMenuApi? GetApi(IModHelper helper)
     {
