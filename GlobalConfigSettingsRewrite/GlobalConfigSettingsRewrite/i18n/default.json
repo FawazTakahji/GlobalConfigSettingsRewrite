@@ -2,6 +2,7 @@
   "button.reset": "Reset",
   "button.cancel": "Cancel",
   "button.save": "Save",
+  "button.ok": "OK",
 
   "title.globalSettings": "Global Settings",
   "title.modSettings": "Mod Settings",

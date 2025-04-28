@@ -19,10 +19,10 @@
           layout="stretch content"
           horizontal-content-alignment="end"
           margin="0,10,0,0">
-        <button text="Cancel"
+        <button text={#button.cancel}
                 margin="0,0,16,0"
                 click=|Cancel()| />
-        <button text="OK"
+        <button text={#button.ok}
                 click=|Ok()| />
     </lane>
 </lane>
