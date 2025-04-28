@@ -27,19 +27,17 @@ public static class OpenModMenu
 
         SettingsViewModel viewModel = new();
         IMenuController controller = Api.ViewEngine.CreateMenuControllerFromAsset($"{Api.ViewsPrefix}/SettingsView", viewModel);
+        controller.CloseAction = () => _openListMenu(listScrollRow);
+        viewModel.Controller = controller;
 
         if (Game1.activeClickableMenu is TitleMenu titleMenu)
         {
             TitleMenu.subMenu = controller.Menu;
             titleMenu.titleInPosition = true;
-            viewModel.Close = () => _openListMenu(listScrollRow);
-            controller.CloseAction = () => _openListMenu(listScrollRow);
         }
         else
         {
             Game1.activeClickableMenu = controller.Menu;
-            viewModel.Close = () => _openListMenu(listScrollRow);
-            controller.CloseAction = () => _openListMenu(listScrollRow);
         }
 
         return false;

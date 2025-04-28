@@ -34,7 +34,8 @@
                                           is-checked={<>UseWhitelist}
                                           layout="content 32px" />
                                 <button layout="content"
-                                        margin="16,0">
+                                        margin="16,0"
+                                        click=|^OpenSaveList("Whitelist")|>
                                     <image sprite={@Mods/StardewUI/Sprites/SmallUpArrow } />
                                 </button>
 
@@ -42,7 +43,8 @@
                                           is-checked={<>UseBlacklist}
                                           layout="content 32px" />
                                 <button layout="content"
-                                        margin="16,0,0,0">
+                                        margin="16,0,0,0"
+                                        click=|^OpenSaveList("Blacklist")|>
                                     <image sprite={@Mods/StardewUI/Sprites/SmallUpArrow } />
                                 </button>
                             </lane>

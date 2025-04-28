@@ -76,8 +76,17 @@ internal sealed class Mod : StardewModdingAPI.Mod
         {
             ApplySettings();
         }
-        else if (Config.ApplyOnLoad)
+        else if (!SaveCreated && Config.ApplyOnLoad)
         {
+            if (Constants.SaveFolderName is not null && Config.UseWhitelist && !Config.Whitelist.Contains(Constants.SaveFolderName, StringComparer.OrdinalIgnoreCase))
+            {
+                return;
+            }
+            if (Constants.SaveFolderName is not null && Config.UseBlacklist && Config.Blacklist.Contains(Constants.SaveFolderName, StringComparer.OrdinalIgnoreCase))
+            {
+                return;
+            }
+
             ApplySettings();
         }
         SaveCreated = false;
@@ -85,15 +94,6 @@ internal sealed class Mod : StardewModdingAPI.Mod
 
     private static void ApplySettings()
     {
-        if (Constants.SaveFolderName is not null && Config.UseWhitelist && !Config.Whitelist.Contains(Constants.SaveFolderName))
-        {
-            return;
-        }
-        if (Constants.SaveFolderName is not null && Config.UseBlacklist && Config.Blacklist.Contains(Constants.SaveFolderName))
-        {
-            return;
-        }
-
         ApplyGeneral();
         ApplySound();
         ApplyGraphics();
