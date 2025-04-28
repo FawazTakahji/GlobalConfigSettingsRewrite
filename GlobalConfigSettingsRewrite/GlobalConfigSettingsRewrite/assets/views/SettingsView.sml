@@ -51,6 +51,86 @@
                             <label horizontal-alignment="end" text={#paragraph.filters} />
                         </lane>
                     </expander>
+
+                    <expander *context={General}
+                              header-padding="0,0,0,16"
+                              margin="0,16,0,0">
+                        <label *outlet="Header"
+                               text={#game.title.general} />
+                        <lane orientation="vertical">
+                            <lane orientation="horizontal">
+                                <checkbox label-text={#game.option.autoRun}
+                                          is-checked={<>AutoRun}
+                                          layout="content 32px" />
+                                <checkbox label-text={#game.option.showPortraits}
+                                          is-checked={<>ShowPortraits}
+                                          layout="content 32px"
+                                          margin="16,0" />
+                                <checkbox label-text={#game.option.showMerchantPortraits}
+                                          is-checked={<>ShowMerchantPortraits}
+                                          layout="content 32px" />
+                            </lane>
+
+                            <lane orientation="horizontal"
+                                  margin="0,16">
+                                <checkbox label-text={#game.option.alwaysShowToolHitLocation}
+                                          is-checked={<>AlwaysShowToolHitLocation}
+                                          layout="content 32px" />
+                                <checkbox label-text={#game.option.hideToolHitLocationWhenMoving}
+                                          is-checked={<>HideToolHitLocationWhenInMotion}
+                                          layout="content 32px"
+                                          margin="16,0,0,0" />
+                            </lane>
+
+                            <lane orientation="horizontal">
+                                <checkbox label-text={#game.option.controllerPlacementTileIndicator}
+                                          is-checked={<>ShowPlacementTileForGamepad}
+                                          layout="content 32px" />
+                                <checkbox label-text={#game.option.pauseWhenGameWindowIsInactive}
+                                          is-checked={<>PauseWhenOutOfFocus}
+                                          layout="content 32px"
+                                          margin="16,0" />
+                            </lane>
+
+                            <lane orientation="horizontal"
+                                  margin="0,16">
+                                <checkbox label-text={#game.option.useControllerStyleMenus}
+                                          is-checked={<>SnappyMenus}
+                                          layout="content 32px" />
+                                <checkbox label-text={#game.option.showAdvancedCraftingInformation}
+                                          is-checked={<>ShowAdvancedCraftingInformation}
+                                          layout="content 32px"
+                                          margin="16,0,0,0" />
+                            </lane>
+
+                            <lane orientation="horizontal">
+                                <lane orientation="vertical">
+                                    <label text={#game.option.gamepadMode} />
+                                    <dropdown options={:GamepadModes}
+                                              option-format={:GamepadModeFormat}
+                                              selected-option={<>GamepadMode}
+                                              option-min-width="250" />
+                                </lane>
+
+                                <lane orientation="vertical"
+                                      margin="16,0">
+                                    <label text={#game.option.itemStowing} />
+                                    <dropdown options={:StowingModes}
+                                              option-format={:StowingModeFormat}
+                                              selected-option={<>StowingMode}
+                                              option-min-width="250" />
+                                </lane>
+
+                                <lane orientation="vertical">
+                                    <label text={#game.option.slingshotFireMode} />
+                                    <dropdown options={:SlingshotFireModes}
+                                              option-format={:SlingshotFireModeFormat}
+                                              selected-option={<>UseLegacySlingshotFiring}
+                                              option-min-width="300" />
+                                </lane>
+                            </lane>
+                        </lane>
+                    </expander>
                 </lane>
             </scrollable>
 
