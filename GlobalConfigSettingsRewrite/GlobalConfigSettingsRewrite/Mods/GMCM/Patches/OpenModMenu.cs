@@ -27,19 +27,37 @@ public static class OpenModMenu
 
         SettingsViewModel viewModel = new();
         IMenuController controller = Api.ViewEngine.CreateMenuControllerFromAsset($"{Api.ViewsPrefix}/SettingsView", viewModel);
-        controller.CloseAction = () => _openListMenu(listScrollRow);
         viewModel.Controller = controller;
 
         if (Game1.activeClickableMenu is TitleMenu titleMenu)
         {
             TitleMenu.subMenu = controller.Menu;
             titleMenu.titleInPosition = true;
+            controller.CloseAction = () =>
+            {
+                controller.Menu.exitThisMenu(false);
+                OpenSettingsMenu(() => _openListMenu(listScrollRow));
+            };
         }
         else
         {
             Game1.activeClickableMenu = controller.Menu;
+            controller.CloseAction = () => _openListMenu(listScrollRow);
         }
 
         return false;
+    }
+
+    public static async Task OpenSettingsMenu(Action openListMenu)
+    {
+        try
+        {
+            await Task.Delay(1);
+            openListMenu.Invoke();
+        }
+        catch (Exception ex)
+        {
+            Mod.Logger.Log($"Failed to open gmcm menu: {ex}", LogLevel.Error);
+        }
     }
 }
