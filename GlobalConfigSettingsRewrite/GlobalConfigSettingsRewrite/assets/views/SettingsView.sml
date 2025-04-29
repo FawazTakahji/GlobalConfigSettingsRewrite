@@ -195,6 +195,76 @@
                                       layout="content 32px" />
                         </lane>
                     </expander>
+
+                    <expander *context={Graphics}
+                              header-padding="0,0,0,16"
+                              margin="0,16">
+                        <label *outlet="Header"
+                               text={#game.title.graphics} />
+                        <lane orientation="vertical">
+                            <lane orientation="vertical">
+                                <label text={#game.option.menuBackgrounds} />
+                                <dropdown options={:Backgrounds}
+                                          option-format={:BackgroundFormat}
+                                          selected-option={<>MenuBackgrounds}
+                                          option-min-width="300" />
+                            </lane>
+
+                            <checkbox label-text={#game.option.vsync}
+                                      is-checked={<>Vsync}
+                                      layout="content 32px"
+                                      margin="0,16" />
+
+                            <lane orientation="vertical">
+                                <label text={#game.option.uiScale} />
+                                <slider track-width="300"
+                                        min="75"
+                                        max="150"
+                                        interval="1"
+                                        value-format={:^SliderFormat}
+                                        value={<>UiScale} />
+                            </lane>
+
+                            <checkbox label-text={#game.option.lockToolbar}
+                                      is-checked={<>LockToolbar}
+                                      layout="content 32px"
+                                      margin="0,16" />
+
+                            <lane orientation="vertical">
+                                <label text={#game.option.zoomLevel} />
+                                <slider track-width="300"
+                                        min="75"
+                                        max="200"
+                                        interval="1"
+                                        value-format={:^SliderFormat}
+                                        value={<>ZoomLevel} />
+                            </lane>
+
+                            <checkbox label-text={#game.option.zoomButtons}
+                                      is-checked={<>ZoomButtons}
+                                      layout="content 32px"
+                                      margin="0,16" />
+
+                            <lane orientation="vertical">
+                                <label text={#game.option.snowTransparency} />
+                                <slider track-width="300"
+                                        min="0"
+                                        max="100"
+                                        interval="1"
+                                        value-format={:^SliderFormat}
+                                        value={<>SnowTransparency} />
+                            </lane>
+
+                            <checkbox label-text={#game.option.showFlashEffects}
+                                      is-checked={<>ShowFlashEffects}
+                                      layout="content 32px"
+                                      margin="0,16" />
+
+                            <checkbox label-text={#game.option.useHardwareCursor}
+                                      is-checked={<>UseHardwareCursor}
+                                      layout="content 32px" />
+                        </lane>
+                    </expander>
                 </lane>
             </scrollable>
 
