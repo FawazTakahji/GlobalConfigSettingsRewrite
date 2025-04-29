@@ -266,7 +266,7 @@
                         </lane>
                     </expander>
 
-                    <expander *context={Controls} is-expanded="true"
+                    <expander *context={Controls}
                               header-padding="0,0,0,16">
                         <label *outlet="Header"
                                text={#game.title.controls} />
