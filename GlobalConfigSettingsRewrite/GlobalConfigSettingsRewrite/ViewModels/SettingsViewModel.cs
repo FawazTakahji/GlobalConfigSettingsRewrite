@@ -16,11 +16,15 @@ public partial class SettingsViewModel : ViewModelBase
     private readonly List<SaveData>? _saves;
     [Notify] private ModSettings _modSettings;
     [Notify] private GeneralSettings _general;
+    [Notify] private SoundSettings _sound;
+
+    public Func<float, string> SliderFormat { get; set; } = value => $"{value}%";
 
     public SettingsViewModel()
     {
         ModSettings = new(Mod.Config);
         General = new(Mod.Config);
+        Sound = new(Mod.Config);
 
         try
         {
@@ -38,6 +42,7 @@ public partial class SettingsViewModel : ViewModelBase
         Config config = new Config();
         ModSettings = new(config);
         General = new(config);
+        Sound = new(config);
     }
 
     public void Cancel()
@@ -49,6 +54,7 @@ public partial class SettingsViewModel : ViewModelBase
     {
         ModSettings.Save();
         General.Save();
+        Sound.Save();
 
         try
         {

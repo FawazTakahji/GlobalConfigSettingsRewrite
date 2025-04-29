@@ -54,7 +54,7 @@
 
                     <expander *context={General}
                               header-padding="0,0,0,16"
-                              margin="0,16,0,0">
+                              margin="0,16">
                         <label *outlet="Header"
                                text={#game.title.general} />
                         <lane orientation="vertical">
@@ -129,6 +129,72 @@
                                               option-min-width="300" />
                                 </lane>
                             </lane>
+                        </lane>
+                    </expander>
+
+                    <expander *context={Sound}
+                              header-padding="0,0,0,16">
+                        <label *outlet="Header"
+                               text={#game.title.sound} />
+                        <lane orientation="vertical">
+                            <lane orientation="vertical">
+                                <label text={#game.option.musicVolume} />
+                                <slider track-width="200"
+                                        min="0"
+                                        max="100"
+                                        interval="1"
+                                        value-format={:^SliderFormat}
+                                        value={<>MusicVolume} />
+                            </lane>
+
+                            <lane orientation="vertical"
+                                  margin="0,16">
+                                <label text={#game.option.soundVolume} />
+                                <slider track-width="200"
+                                        min="0"
+                                        max="100"
+                                        interval="1"
+                                        value-format={:^SliderFormat}
+                                        value={<>SoundVolume} />
+                            </lane>
+
+                            <lane orientation="vertical">
+                                <label text={#game.option.ambientVolume} />
+                                <slider track-width="200"
+                                        min="0"
+                                        max="100"
+                                        interval="1"
+                                        value-format={:^SliderFormat}
+                                        value={<>AmbientVolume} />
+                            </lane>
+
+                            <lane orientation="vertical"
+                                  margin="0,16">
+                                <label text={#game.option.footstepVolume} />
+                                <slider track-width="200"
+                                        min="0"
+                                        max="100"
+                                        interval="1"
+                                        value-format={:^SliderFormat}
+                                        value={<>FootstepVolume} />
+                            </lane>
+
+                            <lane orientation="vertical">
+                                <label text={#game.option.fishingBiteSound} />
+                                <dropdown options={:FishingBiteSounds}
+                                          option-format={:FishingBiteSoundFormat}
+                                          selected-option={<>FishingBiteSound}
+                                          option-min-width="250" />
+                            </lane>
+
+                            <checkbox label-text={#game.option.dialogueTypingSound}
+                                      is-checked={<>DialogueTypingSound}
+                                      layout="content 32px"
+                                      margin="0,16" />
+
+                            <checkbox label-text={#game.option.muteAnimalSounds}
+                                      is-checked={<>MuteAnimalSounds}
+                                      layout="content 32px" />
                         </lane>
                     </expander>
                 </lane>
