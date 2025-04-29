@@ -95,5 +95,7 @@
   "game.option.inventorySlot11": "Inventory Slot 11",
   "game.option.inventorySlot12": "Inventory Slot 12",
 
+  "other.reset-controls": "Reset Controls",
+  "other.not-set": "Not set",
   "other.unknown": "Unknown"
 }

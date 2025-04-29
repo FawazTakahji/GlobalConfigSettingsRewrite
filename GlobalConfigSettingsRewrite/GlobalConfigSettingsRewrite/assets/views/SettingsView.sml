@@ -280,7 +280,7 @@
                                       layout="content 32px"
                                       margin="0,16" />
 
-                            <button text="Reset Controls"
+                            <button text={#other.reset-controls}
                                     click=|^ResetControls()| />
 
                             <control label={#game.option.checkDoAction}
@@ -403,7 +403,7 @@
         <keybind-editor button-height="32"
                         sprite-map={@Mods/StardewUI/SpriteMaps/Buttons:default-default-0.1}
                         editable-type="SingleButton"
-                        empty-text="Not set"
+                        empty-text={#other.not-set}
                         focusable="true"
                         keybind-list={&keybind} />
     </lane>
