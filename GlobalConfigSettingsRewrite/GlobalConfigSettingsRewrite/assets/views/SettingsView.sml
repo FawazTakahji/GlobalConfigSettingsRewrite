@@ -265,6 +265,113 @@
                                       layout="content 32px" />
                         </lane>
                     </expander>
+
+                    <expander *context={Controls} is-expanded="true"
+                              header-padding="0,0,0,16">
+                        <label *outlet="Header"
+                               text={#game.title.controls} />
+                        <lane orientation="vertical">
+                            <checkbox label-text={#game.option.controllerRumble}
+                                      is-checked={<>ControllerRumble}
+                                      layout="content 32px" />
+
+                            <checkbox label-text={#game.option.invertToolbarScrollDirection}
+                                      is-checked={<>InvertToolbarScrollDirection}
+                                      layout="content 32px"
+                                      margin="0,16" />
+
+                            <button text="Reset Controls"
+                                    click=|^ResetControls()| />
+
+                            <control label={#game.option.checkDoAction}
+                                     keybind={<>CheckDoAction}
+                                     margin="0,16" />
+
+                            <control label={#game.option.useTool}
+                                     keybind={<>UseTool} />
+
+                            <control label={#game.option.accessMenu}
+                                     keybind={<>AccessMenu}
+                                     margin="0,16" />
+
+                            <control label={#game.option.accessJournal}
+                                     keybind={<>AccessJournal} />
+
+                            <control label={#game.option.accessMap}
+                                     keybind={<>AccessMap}
+                                     margin="0,16" />
+
+                            <control label={#game.option.moveUp}
+                                     keybind={<>MoveUp} />
+
+                            <control label={#game.option.moveLeft}
+                                     keybind={<>MoveLeft}
+                                     margin="0,16" />
+
+                            <control label={#game.option.moveDown}
+                                     keybind={<>MoveDown} />
+
+                            <control label={#game.option.moveRight}
+                                     keybind={<>MoveRight}
+                                     margin="0,16" />
+
+                            <control label={#game.option.chatBox}
+                                     keybind={<>ChatBox} />
+
+                            <control label={#game.option.emoteMenu}
+                                     keybind={<>EmoteMenu}
+                                     margin="0,16" />
+
+                            <control label={#game.option.run}
+                                     keybind={<>Run} />
+
+                            <control label={#game.option.shiftToolbar}
+                                     keybind={<>ShiftToolbar}
+                                     margin="0,16" />
+
+                            <control label={#game.option.inventorySlot1}
+                                     keybind={<>InventorySlot1} />
+
+                            <control label={#game.option.inventorySlot2}
+                                     keybind={<>InventorySlot2}
+                                     margin="0,16" />
+
+                            <control label={#game.option.inventorySlot3}
+                                     keybind={<>InventorySlot3} />
+
+                            <control label={#game.option.inventorySlot4}
+                                     keybind={<>InventorySlot4}
+                                     margin="0,16" />
+
+                            <control label={#game.option.inventorySlot5}
+                                     keybind={<>InventorySlot5} />
+
+                            <control label={#game.option.inventorySlot6}
+                                     keybind={<>InventorySlot6}
+                                     margin="0,16" />
+
+                            <control label={#game.option.inventorySlot7}
+                                     keybind={<>InventorySlot7} />
+
+                            <control label={#game.option.inventorySlot8}
+                                     keybind={<>InventorySlot8}
+                                     margin="0,16" />
+
+                            <control label={#game.option.inventorySlot9}
+                                     keybind={<>InventorySlot9} />
+
+                            <control label={#game.option.inventorySlot10}
+                                     keybind={<>InventorySlot10}
+                                     margin="0,16" />
+
+                            <control label={#game.option.inventorySlot11}
+                                     keybind={<>InventorySlot11} />
+
+                            <control label={#game.option.inventorySlot12}
+                                     keybind={<>InventorySlot12}
+                                     margin="0,16,0,0" />
+                        </lane>
+                    </expander>
                 </lane>
             </scrollable>
 
@@ -285,3 +392,19 @@
         </lane>
     </frame>
 </lane>
+
+<template name="control">
+    <lane orientation="horizontal"
+          vertical-content-alignment="middle"
+          margin={&margin}>
+        <label text={&label}
+               margin="0,0,8,0" />
+
+        <keybind-editor button-height="32"
+                        sprite-map={@Mods/StardewUI/SpriteMaps/Buttons:default-default-0.1}
+                        editable-type="SingleButton"
+                        empty-text="Not set"
+                        focusable="true"
+                        keybind-list={&keybind} />
+    </lane>
+</template>

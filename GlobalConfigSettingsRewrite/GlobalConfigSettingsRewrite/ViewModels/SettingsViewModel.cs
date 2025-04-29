@@ -18,6 +18,7 @@ public partial class SettingsViewModel : ViewModelBase
     [Notify] private GeneralSettings _general;
     [Notify] private SoundSettings _sound;
     [Notify] private GraphicsSettings _graphics;
+    [Notify] private ControlsSettings _controls;
 
     public Func<float, string> SliderFormat { get; set; } = value => $"{value}%";
 
@@ -27,6 +28,7 @@ public partial class SettingsViewModel : ViewModelBase
         General = new(Mod.Config);
         Sound = new(Mod.Config);
         Graphics = new(Mod.Config);
+        Controls = new(Mod.Config);
 
         try
         {
@@ -46,6 +48,7 @@ public partial class SettingsViewModel : ViewModelBase
         General = new(config);
         Sound = new(config);
         Graphics = new(config);
+        Controls = new(config);
     }
 
     public void Cancel()
@@ -59,6 +62,7 @@ public partial class SettingsViewModel : ViewModelBase
         General.Save();
         Sound.Save();
         Graphics.Save();
+        Controls.Save();
 
         try
         {
@@ -70,6 +74,15 @@ public partial class SettingsViewModel : ViewModelBase
         }
 
         Controller?.Close();
+    }
+
+    public void ResetControls()
+    {
+        Controls = new(new Config
+        {
+            ControllerRumble = Controls.ControllerRumble,
+            InvertToolbarScrollDirection = Controls.InvertToolbarScrollDirection
+        });
     }
 
     public void OpenSaveList(string which)
