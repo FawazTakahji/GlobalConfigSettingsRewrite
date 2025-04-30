@@ -97,5 +97,9 @@
 
   "other.reset-controls": "Reset Controls",
   "other.not-set": "Not set",
-  "other.unknown": "Unknown"
+  "other.unknown": "Unknown",
+
+  "console.open-menu.documentation": "Opens the global settings menu.",
+  "console.stardewui.not-installed": "StardewUI is not installed.",
+  "console.go-back-title-screen": "Go back to the title screen before opening the menu."
 }

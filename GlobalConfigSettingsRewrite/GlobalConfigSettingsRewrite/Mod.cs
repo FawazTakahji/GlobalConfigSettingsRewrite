@@ -1,8 +1,11 @@
 ﻿using GlobalConfigSettingsRewrite.Mods;
+using GlobalConfigSettingsRewrite.ViewModels;
 using Microsoft.Xna.Framework.Input;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
+using StardewUI.Framework;
 using StardewValley;
+using StardewValley.Menus;
 using GMCMPatcher = GlobalConfigSettingsRewrite.Mods.GMCM.Patches.Patcher;
 using GMCMSetup = GlobalConfigSettingsRewrite.Mods.GMCM.Setup;
 using StardewUISetup = GlobalConfigSettingsRewrite.Mods.StardewUI.Setup;
@@ -27,6 +30,8 @@ internal sealed class Mod : StardewModdingAPI.Mod
         helper.Events.GameLoop.GameLaunched += OnGameLaunched;
         helper.Events.GameLoop.SaveCreated += OnSaveCreated;
         helper.Events.GameLoop.SaveLoaded += OnSaveLoaded;
+
+        helper.ConsoleCommands.Add("gcsr_open", I18n.Console_OpenMenu_Documentation(), (_, _) => OpenMenu());
     }
 
     private void OnGameLaunched(object? sender, GameLaunchedEventArgs e)
@@ -90,6 +95,45 @@ internal sealed class Mod : StardewModdingAPI.Mod
             ApplySettings();
         }
         SaveCreated = false;
+    }
+
+    public static void OpenMenu()
+    {
+        if (Api.ViewEngine is null)
+        {
+            Logger.Log(I18n.Console_Stardewui_NotInstalled(), LogLevel.Warn);
+            return;
+        }
+
+        SettingsViewModel viewModel = new();
+        IMenuController controller = Api.ViewEngine.CreateMenuControllerFromAsset($"{Api.ViewsPrefix}/SettingsView", viewModel);
+        viewModel.Controller = controller;
+
+        if (Game1.activeClickableMenu is null)
+        {
+            Game1.activeClickableMenu = controller.Menu;
+        }
+        else if (Game1.activeClickableMenu is TitleMenu)
+        {
+            if (TitleMenu.subMenu is null)
+            {
+                TitleMenu.subMenu = controller.Menu;
+            }
+            else
+            {
+                Logger.Log(I18n.Console_GoBackTitleScreen(), LogLevel.Warn);
+            }
+        }
+        else
+        {
+            IClickableMenu menu = Game1.activeClickableMenu;
+            while (menu.GetChildMenu() is not null)
+            {
+                menu = menu.GetChildMenu();
+            }
+
+            menu.SetChildMenu(controller.Menu);
+        }
     }
 
     private static void ApplySettings()
