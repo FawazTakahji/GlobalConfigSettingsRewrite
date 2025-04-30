@@ -113,40 +113,45 @@ internal sealed class Mod : StardewModdingAPI.Mod
 
     public static void OpenMenu()
     {
-        if (Api.ViewEngine is null)
+        if (Api.ViewEngine is not null)
         {
-            Logger.Log(I18n.Console_Stardewui_NotInstalled(), LogLevel.Warn);
-            return;
-        }
+            SettingsViewModel viewModel = new();
+            IMenuController controller = Api.ViewEngine.CreateMenuControllerFromAsset($"{Api.ViewsPrefix}/SettingsView", viewModel);
+            viewModel.Controller = controller;
 
-        SettingsViewModel viewModel = new();
-        IMenuController controller = Api.ViewEngine.CreateMenuControllerFromAsset($"{Api.ViewsPrefix}/SettingsView", viewModel);
-        viewModel.Controller = controller;
-
-        if (Game1.activeClickableMenu is null)
-        {
-            Game1.activeClickableMenu = controller.Menu;
-        }
-        else if (Game1.activeClickableMenu is TitleMenu)
-        {
-            if (TitleMenu.subMenu is null)
+            if (Game1.activeClickableMenu is null)
             {
-                TitleMenu.subMenu = controller.Menu;
+                Game1.activeClickableMenu = controller.Menu;
+            }
+            else if (Game1.activeClickableMenu is TitleMenu)
+            {
+                if (TitleMenu.subMenu is null)
+                {
+                    TitleMenu.subMenu = controller.Menu;
+                }
+                else
+                {
+                    Logger.Log(I18n.Console_GoBackTitleScreen(), LogLevel.Warn);
+                }
             }
             else
             {
-                Logger.Log(I18n.Console_GoBackTitleScreen(), LogLevel.Warn);
+                IClickableMenu menu = Game1.activeClickableMenu;
+                while (menu.GetChildMenu() is not null)
+                {
+                    menu = menu.GetChildMenu();
+                }
+
+                menu.SetChildMenu(controller.Menu);
             }
+        }
+        else if (Api.GMCM is not null)
+        {
+            Api.GMCM.OpenModMenuAsChildMenu(Manifest);
         }
         else
         {
-            IClickableMenu menu = Game1.activeClickableMenu;
-            while (menu.GetChildMenu() is not null)
-            {
-                menu = menu.GetChildMenu();
-            }
-
-            menu.SetChildMenu(controller.Menu);
+            Logger.Log(I18n.Console_Stardewui_NotInstalled(), LogLevel.Warn);
         }
     }
 
