@@ -1,5 +1,6 @@
 ﻿using GenericModConfigMenu;
 using LeFauxMods.Common.Integrations.IconicFramework;
+using StarControl;
 using StardewUI.Framework;
 
 namespace GlobalConfigSettingsRewrite.Mods;
@@ -12,4 +13,6 @@ public static class Api
     public static string ViewsPrefix = "Mods/FawazT.GlobalConfigSettingsRewrite/Views";
 
     public static IIconicFrameworkApi? IconicFramework = null;
+
+    public static IStarControlApi? StarControl = null;
 }

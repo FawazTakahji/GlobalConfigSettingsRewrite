@@ -10,6 +10,7 @@ using GMCMPatcher = GlobalConfigSettingsRewrite.Mods.GMCM.Patches.Patcher;
 using GMCMSetup = GlobalConfigSettingsRewrite.Mods.GMCM.Setup;
 using StardewUISetup = GlobalConfigSettingsRewrite.Mods.StardewUI.Setup;
 using IconicFrameworkSetup = GlobalConfigSettingsRewrite.Mods.IconicFramework.Setup;
+using StarControlSetup = GlobalConfigSettingsRewrite.Mods.StarControl.Setup;
 
 namespace GlobalConfigSettingsRewrite;
 
@@ -60,6 +61,12 @@ internal sealed class Mod : StardewModdingAPI.Mod
         if (Api.IconicFramework is not null)
         {
             IconicFrameworkSetup.Register(Api.IconicFramework);
+        }
+
+        Api.StarControl = StarControlSetup.GetApi(Helper);
+        if (Api.StarControl is not null)
+        {
+            StarControlSetup.Register(Api.StarControl);
         }
     }
 
