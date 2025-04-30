@@ -7,10 +7,24 @@
   "UniqueID": "FawazT.GlobalConfigSettingsRewrite",
   "EntryDll": "GlobalConfigSettingsRewrite.dll",
   "MinimumApiVersion": "4.0.0",
-  "UpdateKeys": [],
+  "UpdateKeys": [
+    "Nexus:33653",
+    "Github:FawazTakahji/GlobalConfigSettingsRewrite"
+  ],
   "Dependencies": [
     {
+      "UniqueID": "focustense.StardewUI"
+    },
+    {
       "UniqueID": "spacechase0.GenericModConfigMenu",
+      "IsRequired": false
+    },
+    {
+      "UniqueID": "furyx639.ToolbarIcons",
+      "IsRequired": false
+    },
+    {
+      "UniqueID": "focustense.StarControl",
       "IsRequired": false
     }
   ]
