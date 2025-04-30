@@ -12,6 +12,7 @@ namespace StarControl;
 /// </summary>
 public interface IStarControlApi
 {
+/*
     /// <summary>
     /// Forces a previously-registered page to be recreated the next time the menu is about to be shown.
     /// </summary>
@@ -31,7 +32,9 @@ public interface IStarControlApi
     /// <param name="mod">Manifest for the mod that registered the menu.</param>
     /// <param name="id">Unique (per mod) ID for the page to invalidate.</param>
     void InvalidatePage(IManifest mod, string id);
+*/
 
+/*
     /// <summary>
     /// Registers a new page to be made available in the Mod Menu (default: right trigger).
     /// </summary>
@@ -40,6 +43,7 @@ public interface IStarControlApi
     /// the previous page.</param>
     /// <param name="factory">Factory for creating the page.</param>
     void RegisterCustomMenuPage(IManifest mod, string id, IRadialMenuPageFactory factory);
+*/
 
     /// <summary>
     /// Registers items to be available in the user's item library.
@@ -59,6 +63,7 @@ public interface IStarControlApi
     void RegisterItems(IManifest mod, IEnumerable<IRadialMenuItem> items);
 }
 
+/*
 /// <summary>
 /// Factory for creating an <see cref="IRadialMenuPage"/> which adds mod-specific menu content.
 /// </summary>
@@ -77,7 +82,9 @@ public interface IRadialMenuPageFactory
     /// instead of <see cref="Game1.player"/> in case of co-op play.</param>
     IRadialMenuPage CreatePage(Farmer who);
 }
+*/
 
+/*
 /// <summary>
 /// A single page in one of the radial menus.
 /// </summary>
@@ -111,6 +118,7 @@ public interface IRadialMenuPage
         return !Items.Any(item => item is not null);
     }
 }
+*/
 
 /// <summary>
 /// Describes a single item on an <see cref="IRadialMenuPage"/>.
@@ -146,6 +154,7 @@ public interface IRadialMenuItem
     /// </remarks>
     string Description { get; }
 
+/*
     /// <summary>
     /// Whether the item is currently enabled.
     /// </summary>
@@ -153,7 +162,9 @@ public interface IRadialMenuItem
     /// Disabled items show up in the menu as semi-transparent, and cannot be activated.
     /// </remarks>
     bool Enabled => true;
+*/
 
+/*
     /// <summary>
     /// The amount available.
     /// </summary>
@@ -163,7 +174,9 @@ public interface IRadialMenuItem
     /// render as digits at the bottom-right of the item icon/sprite in the menu.
     /// </remarks>
     int? StackSize => null;
+*/
 
+/*
     /// <summary>
     /// The item's quality, from 0 (base) to 3 (iridium).
     /// </summary>
@@ -172,6 +185,7 @@ public interface IRadialMenuItem
     /// item's icon determined by its <see cref="Texture"/> and <see cref="SourceRectangle"/>.
     /// </remarks>
     int? Quality => null;
+*/
 
     /// <summary>
     /// The texture (sprite sheet) containing the item's icon to display in the menu.
@@ -191,6 +205,7 @@ public interface IRadialMenuItem
     /// </remarks>
     Rectangle? SourceRectangle => null;
 
+/*
     /// <summary>
     /// Optional separate area within the <see cref="Texture"/> providing an overlay sprite to
     /// render with <see cref="TintColor"/>.
@@ -202,7 +217,9 @@ public interface IRadialMenuItem
     /// sprite contained in <see cref="SourceRectangle"/>.
     /// </remarks>
     Rectangle? TintRectangle => null;
+*/
 
+/*
     /// <summary>
     /// Tint color, if the item icon/sprite should be drawn in a specific color.
     /// </summary>
@@ -211,6 +228,7 @@ public interface IRadialMenuItem
     /// it applies directly to the base sprite in <see cref="SourceRectangle"/>.
     /// </remarks>
     Color? TintColor => null;
+*/
 
     /// <summary>
     /// Attempts to activate the menu item, i.e. perform its associated action.
@@ -229,6 +247,7 @@ public interface IRadialMenuItem
         ItemActivationType activationType = ItemActivationType.Primary
     );
 
+/*
     /// <summary>
     /// If implemented, performs a function for each frame after the initial <see cref="Activate"/>
     /// during which the trigger button is held.
@@ -237,7 +256,9 @@ public interface IRadialMenuItem
     /// Only applies to <see cref="ItemActivationType.Instant"/>; used e.g. to charge tools.
     /// </remarks>
     void ContinueActivation() { }
+*/
 
+/*
     /// <summary>
     /// If implemented, performs a function on the frame when the trigger button that caused the
     /// initial activation is finally released.
@@ -249,7 +270,9 @@ public interface IRadialMenuItem
     /// the remap controller will keep calling this method on every frame (and ignore further
     /// activation attempts on this item) until it returns <c>true</c>.</returns>
     bool EndActivation() => true;
+*/
 
+/*
     /// <summary>
     /// Chooses the sound to play when activating an item.
     /// </summary>
@@ -276,7 +299,9 @@ public interface IRadialMenuItem
         ItemActivationType activationType,
         string defaultSound
     ) => defaultSound;
+*/
 
+/*
     /// <summary>
     /// Gets whether the item is still in the process of activating, i.e. is expecting to receive an
     /// <see cref="EndActivation"/> but has not yet received it.
@@ -296,6 +321,7 @@ public interface IRadialMenuItem
     /// <returns><c>true</c> if the item is currently in the middle of an activation, animation,
     /// etc. Otherwise, <c>false</c>.</returns>
     bool IsActivating() => false;
+*/
 }
 
 /// <summary>

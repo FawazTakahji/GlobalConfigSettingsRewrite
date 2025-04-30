@@ -37,16 +37,14 @@ public static class Setup
             () => "Global Config Settings Rewrite",
             I18n.Other_OpenMenu);
 
-        api.Subscribe(OnIconPressedEventArgs);
-    }
-
-    private static void OnIconPressedEventArgs(IIconPressedEventArgs e)
-    {
-        if (e.Id != Mod.Manifest.UniqueID)
+        api.Subscribe(e =>
         {
-            return;
-        }
+            if (e.Id != Mod.Manifest.UniqueID)
+            {
+                return;
+            }
 
-        Mod.OpenMenu();
+            Mod.OpenMenu();
+        });
     }
 }
