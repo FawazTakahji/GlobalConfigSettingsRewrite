@@ -13,7 +13,7 @@ public static class Setup
             var api = helper.ModRegistry.GetApi<IGenericModConfigMenuApi>("spacechase0.GenericModConfigMenu");
             if (api is null)
             {
-                Mod.Logger.Log("Couldn't get GMCM API.", LogLevel.Error);
+                Mod.Logger.Log("Couldn't get GMCM API, If you don't have GMCM installed, you can ignore this warning.", LogLevel.Warn);
             }
 
             return api;

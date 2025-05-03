@@ -16,7 +16,7 @@ public static class Setup
             var api = helper.ModRegistry.GetApi<IStarControlApi>("focustense.StarControl");
             if (api is null)
             {
-                Mod.Logger.Log("Couldn't get the StarControl API.", LogLevel.Error);
+                Mod.Logger.Log("Couldn't get the StarControl API, If you don't have StarControl installed, you can ignore this warning.", LogLevel.Warn);
             }
 
             return api;
